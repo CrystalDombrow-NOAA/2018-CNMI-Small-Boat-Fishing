@@ -1,6 +1,8 @@
 #----------------
 #FUNCTION FOR TRIP COSTS CALCULATIONS
 #2018 Guam and CNMI small boat fishery cost-earnings survey
+
+#* redo totals code to match primary + secondary totals code in TripCostsFunction.R
 #----------------
 
 #Load libraries

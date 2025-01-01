@@ -63,54 +63,57 @@ trip.costs.function <- function(cnmi.data.cleaned, gear.type.trip, breakdown){
     mutate(avg.boat.fuel = round(mean(boat.fuel, na.rm = T), 2),
            boat.fuel.std.err = round(std.error(boat.fuel, na.rm = T), 1),
            med.boat.fuel = round(median(boat.fuel, na.rm = T), 2),
-           # min.boat.fuel = round(min(boat.fuel, na.rm = T), 2),
-           # max.boat.fuel = round(max(boat.fuel, na.rm = T), 2),
+           min.boat.fuel = round(min(boat.fuel, na.rm = T), 2),
+           max.boat.fuel = round(max(boat.fuel, na.rm = T), 2),
            #TRUCK FUEL
            avg.truck.fuel = round(mean(truck.fuel, na.rm = T), 2),
            truck.fuel.std.err = round(std.error(truck.fuel, na.rm = T), 1),
            med.truck.fuel = round(median(truck.fuel, na.rm = T), 2),
-           # min.truck.fuel = round(min(truck.fuel, na.rm = T), 2),
-           # max.truck.fuel = round(max(truck.fuel, na.rm = T), 2),
+           min.truck.fuel = round(min(truck.fuel, na.rm = T), 2),
+           max.truck.fuel = round(max(truck.fuel, na.rm = T), 2),
            #ICE
            avg.ice = round(mean(ice, na.rm = T), 2),
            ice.std.err = round(std.error(ice, na.rm = T), 1),
            med.ice = round(median(ice, na.rm = T), 2),
-           # min.ice = round(min(ice, na.rm = T), 2),
-           # max.ice = round(max(ice, na.rm = T), 2),
+           min.ice = round(min(ice, na.rm = T), 2),
+           max.ice = round(max(ice, na.rm = T), 2),
            #BAIT
            avg.bait = round(mean(bait, na.rm = T), 2),
            bait.std.err = round(std.error(bait, na.rm = T), 1),
            med.bait = round(median(bait, na.rm = T), 2),
-           # min.bait = round(min(bait, na.rm = T), 2),
-           # max.bait = round(max(bait, na.rm = T), 2),
+           min.bait = round(min(bait, na.rm = T), 2),
+           max.bait = round(max(bait, na.rm = T), 2),
            #FOOD & BEVERAGE
            avg.food.bev = round(mean(food.bev, na.rm = T), 2),
            food.bev.std.err = round(std.error(food.bev, na.rm = T), 1),
            med.food.bev = round(median(food.bev, na.rm = T), 2),
-           # min.food.bev = round(min(food.bev, na.rm = T), 2),
-           # max.food.bev = round(max(food.bev, na.rm = T), 2),
+           min.food.bev = round(min(food.bev, na.rm = T), 2),
+           max.food.bev = round(max(food.bev, na.rm = T), 2),
            #DAILY MAINTENANCE & REPAIR
            avg.main.rep = round(mean(main.rep, na.rm = T), 2),
            main.rep.std.err = round(std.error(main.rep, na.rm = T), 1),
            med.main.rep = round(median(main.rep, na.rm = T), 2),
-           # min.main.rep = round(min(main.rep, na.rm = T), 2),
-           # max.main.rep = round(max(main.rep, na.rm = T), 2),
+           min.main.rep = round(min(main.rep, na.rm = T), 2),
+           max.main.rep = round(max(main.rep, na.rm = T), 2),
            #OTHER
            avg.other = round(mean(other, na.rm = T), 2),
            other.std.err = round(std.error(other, na.rm = T), 1),
-           med.other = round(median(other, na.rm = T), 2)) %>%
-           # min.other = round(min(other, na.rm = T), 2),
-           # max.other = round(max(other, na.rm = T), 2)) %>% 
-    mutate(avg.trip = unique(avg.boat.fuel + avg.truck.fuel + avg.ice +
-                             avg.food.bev + avg.bait + avg.main.rep + avg.other)) %>%
-    mutate(std.err.trip = std.error(boat.fuel + truck.fuel + ice + bait + 
-                                      food.bev + main.rep + other)) %>%
-    mutate(med.trip = unique(med.boat.fuel + med.truck.fuel + med.ice +
-                               med.food.bev + med.bait + med.main.rep + med.other)) %>% 
-    # mutate(min.trip = unique(min.boat.fuel + min.truck.fuel + min.ice +
-    #                           min.food.bev + min.bait + min.main.rep + min.other)) %>%
-    # mutate(max.trip = unique(max.boat.fuel + max.truck.fuel + max.ice +
-    #                           max.food.bev + max.bait + max.main.rep + max.other)) %>%
+           med.other = round(median(other, na.rm = T), 2),
+           min.other = round(min(other, na.rm = T), 2),
+           max.other = round(max(other, na.rm = T), 2)) %>%
+    mutate(avg.trip = sum(unique(avg.boat.fuel), unique(avg.truck.fuel), 
+                          unique(avg.ice), unique(avg.food.bev),
+                          unique(avg.bait), unique(avg.main.rep), 
+                          unique(avg.other), na.rm = T)) %>%
+    mutate(std.err.trip = std.error(c(boat.fuel + truck.fuel + ice + bait + 
+                                      food.bev + main.rep + other), na.rm = T)) %>%
+    mutate(med.trip = sum(unique(med.boat.fuel), unique(med.truck.fuel),
+                          unique(med.ice), unique(med.food.bev), unique(med.bait),
+                          unique(med.main.rep), unique(med.other), na.rm = T)) %>% 
+    mutate(min.trip = unique(min.boat.fuel + min.truck.fuel + min.ice +
+                              min.food.bev + min.bait + min.main.rep + min.other)) %>%
+    mutate(max.trip = unique(max.boat.fuel + max.truck.fuel + max.ice +
+                              max.food.bev + max.bait + max.main.rep + max.other)) %>%
     mutate(bt.fuel.per = round(unique(avg.boat.fuel / avg.trip * 100), 1),
            truck.fuel.per = round(unique(avg.truck.fuel / avg.trip * 100), 1),
            ice.per = round(unique(avg.ice / avg.trip * 100), 1),
@@ -122,6 +125,7 @@ trip.costs.function <- function(cnmi.data.cleaned, gear.type.trip, breakdown){
   
   #----------------------------------------------
   #PRIMARY CALCULATIONS
+  #* redo totals code to match primary + secondary totals code above.
   
   trip.costs.primary <- cnmi.cleaned.trip.costs %>%
     select(any_of(c("Q34A.combined", "Q36A", "Q36C", "Q36E", "Q36F", "Q36G", 
@@ -192,6 +196,7 @@ trip.costs.function <- function(cnmi.data.cleaned, gear.type.trip, breakdown){
   
   #----------------------------------------------
   #SECONDARY CALCULATIONS
+  #* redo totals code to match primary + secondary totals code above.
   
   trip.costs.secondary <- cnmi.cleaned.trip.costs %>%
     select(any_of(c("Q37A.combined", "Q39A", "Q39C", "Q39E", "Q39F", "Q39G", 
