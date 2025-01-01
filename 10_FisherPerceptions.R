@@ -14,6 +14,7 @@ library(dplyr)
 library(plotrix)
 
 #Run functions used in the analyses below
+source("Functions/DataSummariesFunction.R")
 source("Functions/DistributionFunction.R")
 
 
@@ -54,32 +55,39 @@ write.csv(q55.open.ended, "Tables/Q55_openended.csv", row.names = F)
 
 
 # Q59A. Rules are followed and enforced
+q59a.data.sum <- data.summaries.function(cnmi.data.cleaned, q.number = "Q59A")
 q59a.distr <- distribution.function(cnmi.data.cleaned, q.number = "Q59A", 
                                     categories = 1:5) 
 
 # Q59B. My voice is included in decision making
+q59b.data.sum <- data.summaries.function(cnmi.data.cleaned, q.number = "Q59B")
 q59b.distr <- distribution.function(cnmi.data.cleaned, q.number = "Q59B",
                                     categories = 1:5) 
 
 # Q59C. We know how many fish there are
+q59c.data.sum <- data.summaries.function(cnmi.data.cleaned, q.number = "Q59C")
 q59c.distr <- distribution.function(cnmi.data.cleaned, q.number = "Q59C", 
                                     categories = 1:5) 
 
 # Q59D. We know how healthy the reef / other habitats are
+q59d.data.sum <- data.summaries.function(cnmi.data.cleaned, q.number = "Q59D")
 q59d.distr <- distribution.function(cnmi.data.cleaned, q.number = "Q59D", 
                                     categories = 1:5) 
 
 # Q59E. We know about the fisher(men) and fishing community 
   # (income, culture, etc.)
+q59e.data.sum <- data.summaries.function(cnmi.data.cleaned, q.number = "Q59E")
 q59e.distr <- distribution.function(cnmi.data.cleaned, q.number = "Q59E", 
                                     categories = 1:5) 
 
 # Q59F. We build or maintain fisheries infrastructure 
   # (boat ramps, harbors, etc.)
+q59f.data.sum <- data.summaries.function(cnmi.data.cleaned, q.number = "Q59F")
 q59f.distr <- distribution.function(cnmi.data.cleaned, q.number = "Q59F", 
                                     categories = 1:5) 
 
 # Q59G. Other, please specify:
+q59g.data.sum <- data.summaries.function(cnmi.data.cleaned, q.number = "Q59G")
 q59g.distr <- distribution.function(cnmi.data.cleaned, q.number = "Q59G", 
                                     categories = 1:5) 
 
@@ -99,32 +107,39 @@ write.csv(q59h.other.explain, "Tables/Q59H_other.csv", row.names = F)
 
 
 # Q60A. Rules are followed and enforced
+q60a.data.sum <- data.summaries.function(cnmi.data.cleaned, q.number = "Q60A")
 q60a.distr <- distribution.function(cnmi.data.cleaned, q.number = "Q60A", 
                                     categories = 1:5) 
 
 # Q60B. My voice is included in decision making
+q60b.data.sum <- data.summaries.function(cnmi.data.cleaned, q.number = "Q60B")
 q60b.distr <- distribution.function(cnmi.data.cleaned, q.number = "Q60B", 
                                     categories = 1:5) 
 
 # Q60C. We know how many fish there are
+q60c.data.sum <- data.summaries.function(cnmi.data.cleaned, q.number = "Q60C")
 q60c.distr <- distribution.function(cnmi.data.cleaned, q.number = "Q60C", 
                                     categories = 1:5) 
 
 # Q60D. We know how healthy the reef / other habitats are
+q60d.data.sum <- data.summaries.function(cnmi.data.cleaned, q.number = "Q60D")
 q60d.distr <- distribution.function(cnmi.data.cleaned, q.number = "Q60D", 
                                     categories = 1:5) 
 
 # Q60E. We know about the fisher(men) and fishing community 
   # (income, culture, etc.)
+q60e.data.sum <- data.summaries.function(cnmi.data.cleaned, q.number = "Q60E")
 q60e.distr <- distribution.function(cnmi.data.cleaned, q.number = "Q60E", 
                                     categories = 1:5) 
 
 # Q60F. We build or maintain fisheries infrastructure 
   # (boat ramps, harbors, etc.)
+q60f.data.sum <- data.summaries.function(cnmi.data.cleaned, q.number = "Q60F")
 q60f.distr <- distribution.function(cnmi.data.cleaned, q.number = "Q60F", 
                                     categories = 1:5) 
 
 # Q60G. Other
+q60g.data.sum <- data.summaries.function(cnmi.data.cleaned, q.number = "Q60G")
 q60g.distr <- distribution.function(cnmi.data.cleaned, q.number = "Q60G", 
                                     categories = 1:5) 
 

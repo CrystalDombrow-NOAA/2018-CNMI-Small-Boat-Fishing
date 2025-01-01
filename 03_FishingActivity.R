@@ -114,6 +114,10 @@ q2g.distr <- distribution.function(cnmi.data.cleaned,
 #-------------------------------
 q2i.data.sum <- data.summaries.function(cnmi.data.cleaned, q.number = "Q2I")
 
+#Calculate the number of respondents using only 1 gear type
+q2i.percent.ones <- 
+  round(sum(cnmi.data.cleaned$Q2I == 1) / nrow(cnmi.data.cleaned) * 100, 1)
+
 
 #-----------------------------
 #DISTRIBUTION ACROSS VARIABLES
@@ -183,6 +187,11 @@ q3.percent <- cnmi.data.cleaned %>%
   mutate(n.q3 = nrow(q3),
          n.full.sample = nrow(full.sample)) %>%
   mutate(percent = round(n.q3 / n.full.sample * 100, 1))
+
+q3.subgroups <- cnmi.data.cleaned %>%
+  select(Q3.mid.ifelse, Island, sell.fish.chr, highliner, primary.target, 
+         boat.owner) %>%
+  filter(Q3.mid.ifelse >= 1)
 
 
 #---------------------------------------------------------------------------
@@ -351,6 +360,21 @@ q56c.distr <- distribution.no.table.function(cnmi.data.cleaned,
                                              q.number = "Q56C.spp")
 
 
+q56a.distr <- distribution.no.table.function(cnmi.data.cleaned, 
+                                             q.number = "Q56A")
+q56b.distr <- distribution.no.table.function(cnmi.data.cleaned, 
+                                             q.number = "Q56B")
+q56c.distr <- distribution.no.table.function(cnmi.data.cleaned, 
+                                             q.number = "Q56C")
+
+q56a.freq.counts <- q56a.distr[["q.full.sample.dist"]] %>%
+  count(q.num)
+q56b.freq.counts <- q56b.distr[["q.full.sample.dist"]] %>%
+  count(q.num)
+q56c.freq.counts <- q56c.distr[["q.full.sample.dist"]] %>%
+  count(q.num)
+
+
 #---------------------------------------------------------------------------
 
 # Q57. What are the top three species you target to give away?
@@ -361,4 +385,45 @@ q57b.distr <- distribution.no.table.function(cnmi.data.cleaned,
                                              q.number = "Q57B.spp")
 q57c.distr <- distribution.no.table.function(cnmi.data.cleaned, 
                                              q.number = "Q57C.spp")
+
+
+q57a.distr <- distribution.no.table.function(cnmi.data.cleaned, 
+                                             q.number = "Q57A")
+q57b.distr <- distribution.no.table.function(cnmi.data.cleaned, 
+                                             q.number = "Q57B")
+q57c.distr <- distribution.no.table.function(cnmi.data.cleaned, 
+                                             q.number = "Q57C")
+
+q57a.freq.counts <- q57a.distr[["q.full.sample.dist"]] %>%
+  count(q.num)
+q57b.freq.counts <- q57b.distr[["q.full.sample.dist"]] %>%
+  count(q.num)
+q57c.freq.counts <- q57c.distr[["q.full.sample.dist"]] %>%
+  count(q.num)
+
+
+#---------------------------------------------------------------------------
+#Checking catch volume for NA's that should be 0's
+
+#Survey, Q8, Q2, Q18, Q21, Q56-57
+#Check separately for pelagics, bottomfish, and reef fish
+#   Didn't include atulai because I wasn't sure how respondents would classify
+#   atulai sales.
+
+
+catch.volume.pelagics <- cnmi.data.cleaned %>%
+  select(Survey, Q8A.mid.ifelse:Q8C.mid.ifelse, Q2A.mid, Q18A, Q21A, 
+         Q56A.spp:Q57C.spp) %>%
+  filter(is.na(Q8A.mid.ifelse))
+
+catch.volume.bottomfish <- cnmi.data.cleaned %>%
+  select(Survey, Q8A.mid.ifelse:Q8C.mid.ifelse, Q2B.mid, Q2C.mid, Q18B, Q21B, 
+         Q56A.spp:Q57C.spp) %>%
+  filter(is.na(Q8B.mid.ifelse))
+
+catch.volume.reef <- cnmi.data.cleaned %>%
+  select(Survey, Q8A.mid.ifelse:Q8C.mid.ifelse, Q2E.mid, Q2F.mid, Q18C, Q21C, 
+         Q56A.spp:Q57C.spp) %>% 
+  filter(is.na(Q8C.mid.ifelse))
+
 

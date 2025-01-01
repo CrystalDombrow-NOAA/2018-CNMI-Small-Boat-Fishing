@@ -26,7 +26,7 @@ source("Functions/DistributionFunction.R")
 
 crew.stats <- cnmi.data.cleaned %>% 
   select(Q13B, Survey, boat.owner, sell.fish, vendor, Q14A:Q14F, Q16A:Q16G, Q22,
-         Q35A:Q35E, Q38A:Q38E, Q42:Q53) %>% 
+         Q22.mid, Q35A:Q35E, Q38A:Q38E, Q42:Q53) %>% 
   filter(Q13B > 4) #Over 50% of the time fishing as crew from Q13B
 
 
@@ -68,4 +68,11 @@ q14.percents <- cnmi.data.cleaned %>%
          q14.mult.per = round(sum(Q14.multiple.responses) / nrow(q14.data) * 100, 1),
          kept.fish = ifelse(Q14A == 1 | !is.na(Q14B), 1, 0),
          kept.fish.per = round(sum(kept.fish) / nrow(q14.data) * 100, 1))
+
+
+
+crew.income.fishing <- crew.stats %>% 
+  select(Q22.mid) %>% 
+  mutate(across(everything(), ~if_else(. == 0, NA, .))) %>% 
+  mutate(mean = mean(Q22.mid, na.rm = T)) 
 
