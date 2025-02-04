@@ -71,4 +71,5 @@ source("07_LevelsOfInvestment.R")
 source("08_CrewConsiderations.R")
 source("09_SocialAspectsOfFishing.R")
 source("10_FisherPerceptions.R")
+source("11_FishingVendors.R")
 
