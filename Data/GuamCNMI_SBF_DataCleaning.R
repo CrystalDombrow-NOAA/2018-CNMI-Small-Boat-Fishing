@@ -329,7 +329,7 @@ Q17.dummy.columns <- c("Q17A.dummy", "Q17B.dummy", "Q17C.dummy", "Q17D.dummy",
 
 #Second batch of variable recoding, needs to be executed after previous recodes
 recode.more.variables <- create.ifelse.variables %>%
-  mutate(vendor = ifelse(is.na(vendor), "independent fisher", vendor),
+  mutate(vendor = ifelse(is.na(vendor), "independent fisher", vendor), 
          Q11A.yesno = ifelse(Q11A > 0, 1, 2), #1 = yes, 2 = no
          Q11B.yesno = ifelse(Q11B > 0, 1, 2),
          Q11C.yesno = ifelse(Q11C > 0, 1, 2),
@@ -401,7 +401,9 @@ create.data.groups <- recode.more.variables %>%
                                                       Q2D.mid + Q2B.mid + 
                                                       Q2C.mid + Q2E.mid + 
                                                       Q2F.mid, "other", 
-                                                      "no primary"))))) #Only 2 for "other" in Guam data, so suppressed the code for it
+                                                      "no primary")))),  #Only 2 for "other" in Guam data, so suppressed the code for it
+         Q50A = ifelse(Q50A == 6 & Q11E.yesno == 1, 2, Q50A),
+         Q50A = ifelse(Q50A == 6 & Q11F.yesno == 1, 2, Q50A))
 
 recode.highliner.nas <- create.data.groups %>%
   mutate(highliner = ifelse(sell.fish == 1 & is.na(highliner), "not highliner", 

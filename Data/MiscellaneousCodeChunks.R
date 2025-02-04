@@ -255,4 +255,22 @@ q40.including.zeros <- annual.expenditures.colnames %>%
 #                               max.gear + max.electronics + max.fees +
 #                               max.safety)))
 
+#-----------------------------------------------------------------------------
+#Commercial fishers, vendors, employment status
+
+vendor.highliner.employed <- cnmi.data.cleaned %>%
+  select(Survey, Q50A, highliner, vendor, Q11E.yesno, Q11F.yesno, Q22.mid) %>%
+  #filter(Q50A == 6) %>%
+  filter(Q11F.yesno == 1 & Q11E.yesno == 1)
+
+vendor.highliner <- cnmi.data.cleaned %>%
+  select(Survey, vendor, highliner, boat.owner) %>%
+  filter(vendor == "vendor")
+
+vendor.highliner.employed <- guam.cnmi.data.raw %>%
+  select(Survey, Island, Q50A, Q11E, Q11F, Q22) %>%
+  #filter(Q50A == 6) %>%
+  filter(Q11F >= 1 & Q11E >= 1) %>%
+  filter(Island != "Guam")
+
 
