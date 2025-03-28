@@ -51,6 +51,20 @@ q24c.distr <- distribution.function(cnmi.data.cleaned, q.number = "Q24C",
 q25.data.sum <- data.summaries.function(cnmi.data.cleaned, 
                                         q.number = "Q25.boatowner")
 
+#DISTRIBUTION FUNCTION NOT WORKING, FULL SAMPLE FOR BROCHURE:
+  #Create object to calculate percentages below
+n.q25 <- cnmi.data.cleaned %>%
+  select(Q25.boatowner) %>%
+  drop_na()
+
+  #Calculate full sample distribution
+q25.dist <-  cnmi.data.cleaned %>%
+  select(Q25.boatowner) %>%
+  drop_na() %>%
+  group_by(Q25.boatowner) %>%
+  mutate(percent = round(100 * n() / nrow(n.q25), 1)) %>%
+  arrange()
+
 
 #---------------------------------------------------------------------
 
