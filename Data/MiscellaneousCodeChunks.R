@@ -274,3 +274,20 @@ vendor.highliner.employed <- guam.cnmi.data.raw %>%
   filter(Island != "Guam")
 
 
+#-----------------------------------------------------------------------------
+# Q10H-I Other commercial fisher definitions
+
+q10.hi.q16 <- cnmi.data.cleaned %>%
+  select(Survey, Q10H:Q10I, Q16A.mid:Q16G.mid) 
+
+
+#-----------------------------------------------------------------------------
+# Q54. Do you feel there will be more/less fishing in the coming year?
+
+q54.subgroups <- cnmi.data.cleaned %>%
+  select(Survey, Q54A:Q54C, Q55, Island, sell.fish, highliner, primary.target, 
+         boat.owner) %>%
+  filter(Q54A == 2 & Q54B == 2 & Q54C == 2)
+
+
+
