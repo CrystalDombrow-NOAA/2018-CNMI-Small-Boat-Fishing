@@ -57,7 +57,7 @@
 rm(list = ls())
 
 #Run data cleaning script
-source("Data/GuamCNMI_SBF_DataCleaning.R")
+source("Data/CNMI_SBF_DataCleaning.R")
 
 
 #Run analyses, by section 
